@@ -36,3 +36,18 @@ const gameBoard = (function () {
 
   return { addMarkToBoard, increaseTurnCount, getBoard, checkWinner, checkDraw };
 })();
+
+function createPlayer(name = "", mark = "") {
+  const playerName = name;
+  const playerMark = mark;
+
+  const getName = () => playerName;
+  const addMark = (position) => {
+    gameBoard.addMarkToBoard(position, playerMark);
+    gameBoard.increaseTurnCount();
+    gameBoard.checkWinner(playerName);
+    gameBoard.checkDraw();
+  };
+
+  return { getName, addMark };
+}
