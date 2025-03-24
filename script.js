@@ -26,12 +26,12 @@ const gameBoard = (function () {
       (board[2] === "O" && board[4] === "O" && board[6] === "O")
     ) {
       isWinner = true;
-      alert(`${player} wins! Game over!`);
+      return `${player} wins! Game over!`;
     }
   };
 
   const checkDraw = () => {
-    if (turnCount === 9 && isWinner === false) alert("Draw!");
+    if (turnCount === 9 && isWinner === false) return "Draw!";
   };
 
   return { addMarkToBoard, increaseTurnCount, getBoard, checkWinner, checkDraw };
