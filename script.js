@@ -59,6 +59,7 @@ const displayController = (function () {
         if (playerOne.getPlayerTurn() === true) {
           playerOne.addMark(event.target.getAttribute("data-grid-number"));
           event.target.innerHTML = playerOne.getMark();
+          event.target.setAttribute("disabled", "");
           playerOne.setPlayerTurn(false);
           playerTwo.setPlayerTurn(true);
           return;
@@ -66,6 +67,7 @@ const displayController = (function () {
 
         playerTwo.addMark(event.target.getAttribute("data-grid-number"));
         event.target.innerHTML = playerTwo.getMark();
+        event.target.setAttribute("disabled", "");
         playerTwo.setPlayerTurn(false);
         playerOne.setPlayerTurn(true);
       });
