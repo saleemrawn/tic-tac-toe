@@ -51,14 +51,37 @@ const displayController = (function () {
     });
   };
 
-  return { renderGameboard };
+  const handlePlayerMarkEvents = () => {
+    const boardButtons = document.querySelectorAll(".board-button");
+
+    boardButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        if (playerOne.getPlayerTurn() === true) {
+          playerOne.addMark(event.target.getAttribute("data-grid-number"));
+          event.target.innerHTML = playerOne.getMark();
+          playerOne.setPlayerTurn(false);
+          playerTwo.setPlayerTurn(true);
+          return;
+        }
+
+        playerTwo.addMark(event.target.getAttribute("data-grid-number"));
+        event.target.innerHTML = playerTwo.getMark();
+        playerTwo.setPlayerTurn(false);
+        playerOne.setPlayerTurn(true);
+      });
+    });
+  };
+
+  return { renderGameboard, handlePlayerMarkEvents };
 })();
 
-function createPlayer(name = "", mark = "") {
+function createPlayer(name = "", mark = "", turn = false) {
   const playerName = name;
   const playerMark = mark;
+  let playerTurn = turn;
 
   const getName = () => playerName;
+  const getMark = () => playerMark;
   const addMark = (position) => {
     gameBoard.addMarkToBoard(position, playerMark);
     gameBoard.increaseTurnCount();
@@ -66,7 +89,14 @@ function createPlayer(name = "", mark = "") {
     gameBoard.checkDraw();
   };
 
-  return { getName, addMark };
+  const getPlayerTurn = () => playerTurn;
+  const setPlayerTurn = (turn = false) => (playerTurn = turn);
+
+  return { getName, addMark, getMark, getPlayerTurn, setPlayerTurn };
 }
 
 displayController.renderGameboard();
+displayController.handlePlayerMarkEvents();
+
+const playerOne = createPlayer("John", "X", true);
+const playerTwo = createPlayer("Alicia", "O", false);
