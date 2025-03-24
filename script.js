@@ -34,7 +34,12 @@ const gameBoard = (function () {
     if (turnCount === 9 && isWinner === false) return "Draw!";
   };
 
-  return { addMarkToBoard, increaseTurnCount, getBoard, checkWinner, checkDraw };
+  const checkGameProgress = (player) => {
+    const status = checkWinner(player) || checkDraw();
+    return status;
+  };
+
+  return { addMarkToBoard, increaseTurnCount, getBoard, checkGameProgress };
 })();
 
 const displayController = (function () {
@@ -87,8 +92,7 @@ function createPlayer(name = "", mark = "", turn = false) {
   const addMark = (position) => {
     gameBoard.addMarkToBoard(position, playerMark);
     gameBoard.increaseTurnCount();
-    gameBoard.checkWinner(playerName);
-    gameBoard.checkDraw();
+    gameBoard.checkGameProgress(playerName);
   };
 
   const getPlayerTurn = () => playerTurn;
