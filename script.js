@@ -37,6 +37,23 @@ const gameBoard = (function () {
   return { addMarkToBoard, increaseTurnCount, getBoard, checkWinner, checkDraw };
 })();
 
+const displayController = (function () {
+  const board = gameBoard.getBoard();
+
+  const renderGameboard = () => {
+    const container = document.querySelector(".gameboard-container");
+
+    board.forEach((mark, index) => {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<button class="board-button" data-grid-number="${index}">${mark}</button>`
+      );
+    });
+  };
+
+  return { renderGameboard };
+})();
+
 function createPlayer(name = "", mark = "") {
   const playerName = name;
   const playerMark = mark;
@@ -51,3 +68,5 @@ function createPlayer(name = "", mark = "") {
 
   return { getName, addMark };
 }
+
+displayController.renderGameboard();
