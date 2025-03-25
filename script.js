@@ -143,6 +143,15 @@ const displayController = (function () {
     });
   };
 
+  const handleAnnouncementEvent = (status = "", player = "") => {
+    showAnnoucementDialog();
+
+    const statusTitle = document.querySelector(".status-title");
+    const winnerName = document.querySelector(".winner-name");
+    statusTitle.innerHTML = status;
+    winnerName.innerHTML = `${player} wins!`;
+  };
+
   const savePlayerOneName = (name) => {
     const playerOneName = document.querySelector(".player-one-name");
     playerOne.setName(name);
@@ -250,6 +259,7 @@ displayController.handlePlayerMarkEvents();
 displayController.handleAddPlayerEvent();
 displayController.handleSaveDialogEvent();
 displayController.handleCancelDialogEvent();
+displayController.handleAnnouncementEvent();
 
 const playerOne = createPlayer("X", true);
 const playerTwo = createPlayer("O", false);
