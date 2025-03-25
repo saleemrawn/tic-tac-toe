@@ -84,6 +84,16 @@ const displayController = (function () {
     });
   };
 
+  const handleAddPlayerEvent = () => {
+    const addPlayerButtons = document.querySelectorAll(".add-player-button");
+    addPlayerButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const playerType = event.target.getAttribute("data-player");
+        showDialog(playerType);
+      });
+    });
+  };
+
   const handlePlayAgainEvent = () => {
     const playAgainButton = document.querySelector(".play-again-button");
     playAgainButton.addEventListener("click", () => {
@@ -122,6 +132,7 @@ const displayController = (function () {
     renderGameboard,
     handlePlayerMarkEvents,
     handlePlayAgainEvent,
+    handleAddPlayerEvent,
     enableAllButtons,
     disableAllButtons,
     resetGame,
@@ -149,6 +160,7 @@ function createPlayer(name = "", mark = "", turn = false) {
 
 displayController.renderGameboard();
 displayController.handlePlayerMarkEvents();
+displayController.handleAddPlayerEvent();
 
 const playerOne = createPlayer("John", "X", true);
 const playerTwo = createPlayer("Alicia", "O", false);
