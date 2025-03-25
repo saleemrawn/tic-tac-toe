@@ -116,6 +116,11 @@ const displayController = (function () {
 
   const handleSaveDialogEvent = () => {
     const addPlayerForm = document.querySelector(".add-player-form");
+    const addPlayerOneButton = document.querySelector(".add-player-button[data-player-number='1']");
+    const addPlayerTwoButton = document.querySelector(".add-player-button[data-player-number='2']");
+    const playerOneName = document.querySelector(".player-one-name");
+    const playerTwoName = document.querySelector(".player-two-name");
+
     addPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
@@ -127,12 +132,16 @@ const displayController = (function () {
         savePlayerOneName(name);
         resetForm();
         closeDialog();
+        displayController.showElements(playerOneName);
+        displayController.hideElements(addPlayerOneButton);
       }
 
       if (playerNumber === "2") {
         savePlayerTwoName(name);
         resetForm();
         closeDialog();
+        displayController.showElements(playerTwoName);
+        displayController.hideElements(addPlayerTwoButton);
       }
     });
   };
@@ -225,6 +234,18 @@ const displayController = (function () {
     addPlayerForm.reset();
   };
 
+  const hideElements = (...elements) => {
+    elements.forEach((element) => {
+      element.classList.add("hide");
+    });
+  };
+
+  const showElements = (...elements) => {
+    elements.forEach((element) => {
+      element.classList.remove("hide");
+    });
+  };
+
   return {
     renderGameboard,
     handlePlayerMarkEvents,
@@ -235,6 +256,8 @@ const displayController = (function () {
     handleAnnouncementEvent,
     enableAllButtons,
     disableAllButtons,
+    hideElements,
+    showElements,
     resetButtonText,
   };
 })();
