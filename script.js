@@ -9,7 +9,7 @@ const gameBoard = (function () {
   const resetIsWinner = () => (isWinner = false);
   const resetTurnCount = () => (turnCount = 0);
   const increaseTurnCount = () => turnCount++;
-  const checkWinner = (player) => {
+  const checkWinner = () => {
     if (
       (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
       (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
@@ -29,30 +29,31 @@ const gameBoard = (function () {
       (board[2] === "O" && board[4] === "O" && board[6] === "O")
     ) {
       isWinner = true;
-      displayController.disableAllButtons();
-      return `${player} wins! Game over!`;
-    }
-  };
-
-  const checkDraw = () => {
-    if (turnCount === 9 && isWinner === false) {
-      displayController.disableAllButtons();
-      return "Draw!";
+      return;
     }
   };
 
   const checkGameProgress = (player) => {
-    const status = checkWinner(player) || checkDraw();
-    return status;
+    checkWinner();
+
+    if (isWinner === true) {
+      displayController.disableAllButtons();
+      displayController.handleAnnouncementEvent("Game Over!", player);
+    }
+
+    if (turnCount === 9 && isWinner === false) {
+      displayController.disableAllButtons();
+      displayController.handleAnnouncementEvent("Draw!");
+    }
   };
 
   return {
+    getBoard,
     addMarkToBoard,
     resetBoardArr,
     resetIsWinner,
     resetTurnCount,
     increaseTurnCount,
-    getBoard,
     checkGameProgress,
   };
 })();
@@ -229,6 +230,7 @@ const displayController = (function () {
     handleAddPlayerEvent,
     handleSaveDialogEvent,
     handleCancelDialogEvent,
+    handleAnnouncementEvent,
     enableAllButtons,
     disableAllButtons,
     resetGame,
@@ -260,7 +262,7 @@ displayController.handlePlayerMarkEvents();
 displayController.handleAddPlayerEvent();
 displayController.handleSaveDialogEvent();
 displayController.handleCancelDialogEvent();
-displayController.handleAnnouncementEvent();
+displayController.handlePlayAgainEvent();
 
 const playerOne = createPlayer("X", true);
 const playerTwo = createPlayer("O", false);
