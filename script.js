@@ -6,6 +6,8 @@ const gameBoard = (function () {
   const getBoard = () => board;
   const addMarkToBoard = (position, mark) => board.splice(position, 1, mark);
   const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
+  const resetIsWinner = () => (isWinner = false);
+  const resetTurnCount = () => (turnCount = 0);
   const increaseTurnCount = () => turnCount++;
   const checkWinner = (player) => {
     if (
@@ -44,7 +46,15 @@ const gameBoard = (function () {
     return status;
   };
 
-  return { addMarkToBoard, resetBoardArr, increaseTurnCount, getBoard, checkGameProgress };
+  return {
+    addMarkToBoard,
+    resetBoardArr,
+    resetIsWinner,
+    resetTurnCount,
+    increaseTurnCount,
+    getBoard,
+    checkGameProgress,
+  };
 })();
 
 const displayController = (function () {
