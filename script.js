@@ -184,6 +184,16 @@ const displayController = (function () {
     addPlayerDialog.close();
   };
 
+  const showAnnoucementDialog = () => {
+    const annoucementDialog = document.querySelector(".announcement-dialog");
+    annoucementDialog.show();
+  };
+
+  const closeAnnoucementDialog = () => {
+    const annoucementDialog = document.querySelector(".announcement-dialog");
+    annoucementDialog.close();
+  };
+
   const resetButtonText = () => {
     const boardButtons = document.querySelectorAll(".board-button");
     boardButtons.forEach((button) => {
