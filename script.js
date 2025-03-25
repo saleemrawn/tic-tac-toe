@@ -94,6 +94,14 @@ const displayController = (function () {
     });
   };
 
+  const handleCancelDialogEvent = () => {
+    const cancelButton = document.querySelector(".cancel-button");
+    cancelButton.addEventListener("click", () => {
+      resetForm();
+      closeDialog();
+    });
+  };
+
   const handlePlayAgainEvent = () => {
     const playAgainButton = document.querySelector(".play-again-button");
     playAgainButton.addEventListener("click", () => {
@@ -148,6 +156,7 @@ const displayController = (function () {
     handlePlayerMarkEvents,
     handlePlayAgainEvent,
     handleAddPlayerEvent,
+    handleCancelDialogEvent,
     enableAllButtons,
     disableAllButtons,
     resetGame,
@@ -176,6 +185,7 @@ function createPlayer(name = "", mark = "", turn = false) {
 displayController.renderGameboard();
 displayController.handlePlayerMarkEvents();
 displayController.handleAddPlayerEvent();
+displayController.handleCancelDialogEvent();
 
 const playerOne = createPlayer("John", "X", true);
 const playerTwo = createPlayer("Alicia", "O", false);
