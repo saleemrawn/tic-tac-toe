@@ -88,9 +88,33 @@ const displayController = (function () {
     const addPlayerButtons = document.querySelectorAll(".add-player-button");
     addPlayerButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
-        const playerType = event.target.getAttribute("data-player");
-        showDialog(playerType);
+        const playerNumber = event.target.getAttribute("data-player-number");
+        showDialog();
+        setFormPlayerAttr(playerNumber);
       });
+    });
+  };
+
+  const handleSaveDialogEvent = () => {
+    const addPlayerForm = document.querySelector(".add-player-form");
+    addPlayerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const playerNumber = event.target.getAttribute("data-player-number");
+      const formData = new FormData(addPlayerForm);
+      const name = formData.get("name");
+
+      if (playerNumber === "1") {
+        savePlayerOneName(name);
+        resetForm();
+        closeDialog();
+      }
+
+      if (playerNumber === "2") {
+        savePlayerTwoName(name);
+        resetForm();
+        closeDialog();
+      }
     });
   };
 
@@ -107,6 +131,23 @@ const displayController = (function () {
     playAgainButton.addEventListener("click", () => {
       resetGame();
     });
+  };
+
+  const savePlayerOneName = (name) => {
+    const playerOneName = document.querySelector(".player-one-name");
+    playerOne.setName(name);
+    playerOneName.innerHTML = playerOne.getName();
+  };
+
+  const savePlayerTwoName = (name) => {
+    const playerTwoName = document.querySelector(".player-two-name");
+    playerTwo.setName(name);
+    playerTwoName.innerHTML = playerTwo.getName();
+  };
+
+  const setFormPlayerAttr = (playerNumber) => {
+    const addPlayerForm = document.querySelector(".add-player-form");
+    addPlayerForm.setAttribute("data-player-number", playerNumber);
   };
 
   const enableAllButtons = () => {
@@ -156,6 +197,7 @@ const displayController = (function () {
     handlePlayerMarkEvents,
     handlePlayAgainEvent,
     handleAddPlayerEvent,
+    handleSaveDialogEvent,
     handleCancelDialogEvent,
     enableAllButtons,
     disableAllButtons,
@@ -163,12 +205,13 @@ const displayController = (function () {
   };
 })();
 
-function createPlayer(name = "", mark = "", turn = false) {
-  const playerName = name;
+function createPlayer(mark = "", turn = false) {
   const playerMark = mark;
+  let playerName = "";
   let playerTurn = turn;
 
   const getName = () => playerName;
+  const setName = (name) => (playerName = name);
   const getMark = () => playerMark;
   const addMark = (position) => {
     gameBoard.addMarkToBoard(position, playerMark);
@@ -179,13 +222,14 @@ function createPlayer(name = "", mark = "", turn = false) {
   const getPlayerTurn = () => playerTurn;
   const setPlayerTurn = (turn = false) => (playerTurn = turn);
 
-  return { getName, addMark, getMark, getPlayerTurn, setPlayerTurn };
+  return { getName, setName, addMark, getMark, getPlayerTurn, setPlayerTurn };
 }
 
 displayController.renderGameboard();
 displayController.handlePlayerMarkEvents();
 displayController.handleAddPlayerEvent();
+displayController.handleSaveDialogEvent();
 displayController.handleCancelDialogEvent();
 
-const playerOne = createPlayer("John", "X", true);
-const playerTwo = createPlayer("Alicia", "O", false);
+const playerOne = createPlayer("X", true);
+const playerTwo = createPlayer("O", false);
