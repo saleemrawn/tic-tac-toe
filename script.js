@@ -140,6 +140,7 @@ const displayController = (function () {
     const playAgainButton = document.querySelector(".play-again-button");
     playAgainButton.addEventListener("click", () => {
       resetGame();
+      closeAnnoucementDialog();
     });
   };
 
