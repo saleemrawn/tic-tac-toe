@@ -132,6 +132,11 @@ const displayController = (function () {
     });
   };
 
+  const resetForm = () => {
+    const addPlayerForm = document.querySelector(".add-player-form");
+    addPlayerForm.reset();
+  };
+
   const resetGame = () => {
     gameBoard.resetBoardArr();
     enableAllButtons();
