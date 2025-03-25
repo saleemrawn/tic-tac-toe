@@ -219,6 +219,8 @@ const displayController = (function () {
 
   const resetGame = () => {
     gameBoard.resetBoardArr();
+    gameBoard.resetIsWinner();
+    gameBoard.resetTurnCount();
     enableAllButtons();
     resetButtonText();
   };
