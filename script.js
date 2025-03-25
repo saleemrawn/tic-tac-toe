@@ -151,7 +151,7 @@ const displayController = (function () {
     const statusTitle = document.querySelector(".status-title");
     const winnerName = document.querySelector(".winner-name");
     statusTitle.innerHTML = status;
-    winnerName.innerHTML = `${player} wins!`;
+    player === "" ? (winnerName.innerHTML = "") : (winnerName.innerHTML = `${player} wins!`);
   };
 
   const savePlayerOneName = (name) => {
