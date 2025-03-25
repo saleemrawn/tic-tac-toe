@@ -8,6 +8,13 @@ const gameBoard = (function () {
   const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
   const resetIsWinner = () => (isWinner = false);
   const resetTurnCount = () => (turnCount = 0);
+  const resetGame = () => {
+    resetBoardArr();
+    resetIsWinner();
+    resetTurnCount();
+    displayController.enableAllButtons();
+    displayController.resetButtonText();
+  };
   const increaseTurnCount = () => turnCount++;
   const checkWinner = () => {
     if (
@@ -53,6 +60,7 @@ const gameBoard = (function () {
     resetBoardArr,
     resetIsWinner,
     resetTurnCount,
+    resetGame,
     increaseTurnCount,
     checkGameProgress,
   };
@@ -140,7 +148,7 @@ const displayController = (function () {
   const handlePlayAgainEvent = () => {
     const playAgainButton = document.querySelector(".play-again-button");
     playAgainButton.addEventListener("click", () => {
-      resetGame();
+      gameBoard.resetGame();
       closeAnnoucementDialog();
     });
   };
@@ -217,14 +225,6 @@ const displayController = (function () {
     addPlayerForm.reset();
   };
 
-  const resetGame = () => {
-    gameBoard.resetBoardArr();
-    gameBoard.resetIsWinner();
-    gameBoard.resetTurnCount();
-    enableAllButtons();
-    resetButtonText();
-  };
-
   return {
     renderGameboard,
     handlePlayerMarkEvents,
@@ -235,7 +235,7 @@ const displayController = (function () {
     handleAnnouncementEvent,
     enableAllButtons,
     disableAllButtons,
-    resetGame,
+    resetButtonText,
   };
 })();
 
