@@ -115,6 +115,16 @@ const displayController = (function () {
     });
   };
 
+  const showDialog = () => {
+    const addPlayerDialog = document.querySelector(".add-player-dialog");
+    addPlayerDialog.show();
+  };
+
+  const closeDialog = () => {
+    const addPlayerDialog = document.querySelector(".add-player-dialog");
+    addPlayerDialog.close();
+  };
+
   const resetButtonText = () => {
     const boardButtons = document.querySelectorAll(".board-button");
     boardButtons.forEach((button) => {
