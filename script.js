@@ -1,10 +1,11 @@
 const gameBoard = (function () {
-  const board = ["", "", "", "", "", "", "", "", ""];
+  let board = ["", "", "", "", "", "", "", "", ""];
   let turnCount = 0;
   let isWinner = false;
 
   const getBoard = () => board;
   const addMarkToBoard = (position, mark) => board.splice(position, 1, mark);
+  const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
   const increaseTurnCount = () => turnCount++;
   const checkWinner = (player) => {
     if (
@@ -26,12 +27,16 @@ const gameBoard = (function () {
       (board[2] === "O" && board[4] === "O" && board[6] === "O")
     ) {
       isWinner = true;
+      displayController.disableAllButtons();
       return `${player} wins! Game over!`;
     }
   };
 
   const checkDraw = () => {
-    if (turnCount === 9 && isWinner === false) return "Draw!";
+    if (turnCount === 9 && isWinner === false) {
+      displayController.disableAllButtons();
+      return "Draw!";
+    }
   };
 
   const checkGameProgress = (player) => {
@@ -39,7 +44,7 @@ const gameBoard = (function () {
     return status;
   };
 
-  return { addMarkToBoard, increaseTurnCount, getBoard, checkGameProgress };
+  return { addMarkToBoard, resetBoardArr, increaseTurnCount, getBoard, checkGameProgress };
 })();
 
 const displayController = (function () {
@@ -79,7 +84,48 @@ const displayController = (function () {
     });
   };
 
-  return { renderGameboard, handlePlayerMarkEvents };
+  const handlePlayAgainEvent = () => {
+    const playAgainButton = document.querySelector(".play-again-button");
+    playAgainButton.addEventListener("click", () => {
+      resetGame();
+    });
+  };
+
+  const enableAllButtons = () => {
+    const boardButtons = document.querySelectorAll(".board-button");
+    boardButtons.forEach((button) => {
+      button.removeAttribute("disabled");
+    });
+  };
+
+  const disableAllButtons = () => {
+    const boardButtons = document.querySelectorAll(".board-button");
+    boardButtons.forEach((button) => {
+      button.setAttribute("disabled", "");
+    });
+  };
+
+  const resetButtonText = () => {
+    const boardButtons = document.querySelectorAll(".board-button");
+    boardButtons.forEach((button) => {
+      button.innerHTML = "";
+    });
+  };
+
+  const resetGame = () => {
+    gameBoard.resetBoardArr();
+    enableAllButtons();
+    resetButtonText();
+  };
+
+  return {
+    renderGameboard,
+    handlePlayerMarkEvents,
+    handlePlayAgainEvent,
+    enableAllButtons,
+    disableAllButtons,
+    resetGame,
+  };
 })();
 
 function createPlayer(name = "", mark = "", turn = false) {
