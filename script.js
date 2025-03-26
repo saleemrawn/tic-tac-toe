@@ -266,6 +266,7 @@ function createPlayer(mark = "", turn = false) {
   const playerMark = mark;
   let playerName = "";
   let playerTurn = turn;
+  let playerScore = 0;
 
   const getName = () => playerName;
   const setName = (name) => (playerName = name);
@@ -275,11 +276,13 @@ function createPlayer(mark = "", turn = false) {
     gameBoard.increaseTurnCount();
     gameBoard.checkGameProgress(playerName);
   };
+  const getScore = () => playerScore;
+  const incrementScore = () => playerScore++;
 
   const getPlayerTurn = () => playerTurn;
   const setPlayerTurn = (turn = false) => (playerTurn = turn);
 
-  return { getName, setName, addMark, getMark, getPlayerTurn, setPlayerTurn };
+  return { getName, setName, addMark, getMark, getScore, incrementScore, getPlayerTurn, setPlayerTurn };
 }
 
 displayController.renderGameboard();
