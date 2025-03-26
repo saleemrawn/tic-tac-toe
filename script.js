@@ -297,6 +297,11 @@ const displayController = (function () {
   };
 })();
 
+const gameController = (function () {
+  const playerOne = createPlayer("X", true);
+  const playerTwo = createPlayer("O", false);
+})();
+
 function createPlayer(mark = "", turn = false) {
   const playerMark = mark;
   let playerName = "";
@@ -335,9 +340,6 @@ function createPlayer(mark = "", turn = false) {
     setPlayerTurn,
   };
 }
-
-const playerOne = createPlayer("X", true);
-const playerTwo = createPlayer("O", false);
 
 displayController.renderGameboard();
 displayController.handlePlayerMarkEvents();
