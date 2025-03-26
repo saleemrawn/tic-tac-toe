@@ -201,17 +201,17 @@ const displayController = (function () {
     }
   };
 
-  const updateScoreElement = (player) => {
-    if (player !== 1 && player !== 2) {
-      throw new Error(`Invalid argument: expected 1 or 2, but received ${player}.`);
+  const updateScoreElement = (playerNumber) => {
+    if (playerNumber !== 1 && playerNumber !== 2) {
+      throw new Error(`Invalid argument: expected 1 or 2, but received ${playerNumber}.`);
     }
 
-    if (player === 1) {
+    if (playerNumber === 1) {
       const label = document.querySelector(".player-one-score-count");
       label.innerHTML = playerOne.getScore();
     }
 
-    if (player === 2) {
+    if (playerNumber === 2) {
       const label = document.querySelector(".player-two-score-count");
       label.innerHTML = playerTwo.getScore();
     }
