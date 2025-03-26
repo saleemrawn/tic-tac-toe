@@ -139,7 +139,7 @@ const displayController = (function () {
       const name = formData.get("name");
 
       if (playerNumber === "1") {
-        savePlayerOneName(name);
+        savePlayerName(1, name);
         resetForm();
         closeAddPlayerDialog();
         displayController.showElements(playerOneName);
@@ -148,7 +148,7 @@ const displayController = (function () {
       }
 
       if (playerNumber === "2") {
-        savePlayerTwoName(name);
+        savePlayerName(2, name);
         resetForm();
         closeAddPlayerDialog();
         displayController.showElements(playerTwoName);
@@ -183,16 +183,22 @@ const displayController = (function () {
     player === "" ? (winnerName.innerHTML = "") : (winnerName.innerHTML = `${player} wins!`);
   };
 
-  const savePlayerOneName = (name) => {
-    const playerOneName = document.querySelector(".player-one-name");
-    playerOne.setName(name);
-    playerOneName.innerHTML = playerOne.getName();
-  };
+  const savePlayerName = (playerNumber = 0, name = "") => {
+    if (playerNumber !== 1 && playerNumber !== 2) {
+      throw new Error(`Invalid argument: expected 1 or 2, but received ${player}.`);
+    }
 
-  const savePlayerTwoName = (name) => {
-    const playerTwoName = document.querySelector(".player-two-name");
-    playerTwo.setName(name);
-    playerTwoName.innerHTML = playerTwo.getName();
+    if (playerNumber === 1) {
+      const playerOneName = document.querySelector(".player-one-name");
+      playerOne.setName(name);
+      playerOneName.innerHTML = playerOne.getName();
+    }
+
+    if (playerNumber === 2) {
+      const playerTwoName = document.querySelector(".player-two-name");
+      playerTwo.setName(name);
+      playerTwoName.innerHTML = playerTwo.getName();
+    }
   };
 
   const updateScoreElement = (player) => {
