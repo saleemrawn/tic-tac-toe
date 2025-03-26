@@ -215,13 +215,17 @@ const displayController = (function () {
     });
   };
 
+  const startGame = () => {
+    renderGameboard();
+    handlePlayerMarkEvents();
+    handleAddPlayerEvent();
+    handleSaveDialogEvent();
+    handleCancelDialogEvent();
+    handlePlayAgainEvent();
+  };
+
   return {
-    renderGameboard,
-    handlePlayerMarkEvents,
-    handlePlayAgainEvent,
-    handleAddPlayerEvent,
-    handleSaveDialogEvent,
-    handleCancelDialogEvent,
+    startGame,
     handleAnnouncementEvent,
     updateScoreElement,
     enableAllButtons,
@@ -346,9 +350,4 @@ function createPlayer(mark = "", turn = false) {
   };
 }
 
-displayController.renderGameboard();
-displayController.handlePlayerMarkEvents();
-displayController.handleAddPlayerEvent();
-displayController.handleSaveDialogEvent();
-displayController.handleCancelDialogEvent();
-displayController.handlePlayAgainEvent();
+displayController.startGame();
