@@ -301,7 +301,7 @@ const gameController = (function () {
     displayController.resetButtonText();
   };
 
-  return {};
+  return { playerOne, playerTwo };
 })();
 
 function createPlayer(mark = "", turn = false) {
