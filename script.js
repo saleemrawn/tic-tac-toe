@@ -30,6 +30,8 @@ const gameBoard = (function () {
       (board[2] === "X" && board[4] === "X" && board[6] === "X")
     ) {
       playerOne.setHasWon(true);
+      playerOne.incrementScore();
+      displayController.updateScoreElement(1);
       return;
     }
 
@@ -44,6 +46,8 @@ const gameBoard = (function () {
       (board[2] === "O" && board[4] === "O" && board[6] === "O")
     ) {
       playerTwo.setHasWon(true);
+      playerTwo.incrementScore();
+      displayController.updateScoreElement(2);
       return;
     }
   };
@@ -193,6 +197,22 @@ const displayController = (function () {
     playerTwoName.innerHTML = playerTwo.getName();
   };
 
+  const updateScoreElement = (player) => {
+    if (player !== 1 && player !== 2) {
+      throw new Error(`Invalid argument: expected 1 or 2, but received ${player}.`);
+    }
+
+    if (player === 1) {
+      const label = document.querySelector(".player-one-score-count");
+      label.innerHTML = playerOne.getScore();
+    }
+
+    if (player === 2) {
+      const label = document.querySelector(".player-two-score-count");
+      label.innerHTML = playerTwo.getScore();
+    }
+  };
+
   const setFormPlayerAttr = (playerNumber) => {
     const addPlayerForm = document.querySelector(".add-player-form");
     addPlayerForm.setAttribute("data-player-number", playerNumber);
@@ -264,6 +284,7 @@ const displayController = (function () {
     handleSaveDialogEvent,
     handleCancelDialogEvent,
     handleAnnouncementEvent,
+    updateScoreElement,
     enableAllButtons,
     disableAllButtons,
     hideElements,
