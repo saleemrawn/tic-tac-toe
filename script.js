@@ -105,7 +105,7 @@ const displayController = (function () {
   const handlePlayAgainEvent = () => {
     const playAgainButton = document.querySelector(".play-again-button");
     playAgainButton.addEventListener("click", () => {
-      gameBoard.resetGame();
+      gameController.resetGame();
       closeAnnoucementDialog();
     });
   };
