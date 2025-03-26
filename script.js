@@ -15,7 +15,7 @@ const gameBoard = (function () {
     displayController.resetButtonText();
   };
   const increaseTurnCount = () => turnCount++;
-  const checkWinner = () => {
+  const checkPlayerOneWin = () => {
     if (
       (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
       (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
@@ -28,10 +28,12 @@ const gameBoard = (function () {
     ) {
       playerOne.setHasWon(true);
       playerOne.incrementScore();
+      displayController.disableAllButtons();
       displayController.updateScoreElement(1);
-      return;
+      displayController.handleAnnouncementEvent("Game Over!", playerOne.getName());
     }
-
+  };
+  const checkPlayerTwoWin = () => {
     if (
       (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
       (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
@@ -44,25 +46,23 @@ const gameBoard = (function () {
     ) {
       playerTwo.setHasWon(true);
       playerTwo.incrementScore();
+      displayController.disableAllButtons();
       displayController.updateScoreElement(2);
-      return;
+      displayController.handleAnnouncementEvent("Game Over!", playerTwo.getName());
     }
   };
 
-  const checkGameProgress = () => {
-    checkWinner();
-
-    if (playerOne.getHasWon() === true || playerTwo.getHasWon() === true) {
-      const name = playerOne.getHasWon() === true ? playerOne.getName() : playerTwo.getName();
-
-      displayController.disableAllButtons();
-      displayController.handleAnnouncementEvent("Game Over!", name);
-    }
-
+  const checkDraw = () => {
     if (turnCount === 9 && playerOne.getHasWon() === false && playerTwo.getHasWon() === false) {
       displayController.disableAllButtons();
       displayController.handleAnnouncementEvent("Draw!");
     }
+  };
+
+  const checkGameProgress = () => {
+    checkPlayerOneWin();
+    checkPlayerTwoWin();
+    checkDraw();
   };
 
   return {
