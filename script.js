@@ -301,7 +301,7 @@ const gameController = (function () {
     displayController.resetButtonText();
   };
 
-  return { playerOne, playerTwo };
+  return { playerOne, playerTwo, increaseTurnCount, checkGameProgress, resetGame };
 })();
 
 function createPlayer(mark = "", turn = false) {
@@ -316,8 +316,8 @@ function createPlayer(mark = "", turn = false) {
   const getMark = () => playerMark;
   const addMark = (position) => {
     gameBoard.addMarkToBoardArr(position, playerMark);
-    gameBoard.increaseTurnCount();
-    gameBoard.checkGameProgress();
+    gameController.checkGameProgress();
+    gameController.increaseTurnCount();
   };
 
   const getScore = () => playerScore;
