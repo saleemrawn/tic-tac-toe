@@ -236,6 +236,7 @@ const displayController = (function () {
 const gameController = (function () {
   const playerOne = createPlayer("X", true);
   const playerTwo = createPlayer("O", false);
+  const board = gameBoard.getBoardArr();
   let turnCount = 0;
 
   const resetTurnCount = () => (turnCount = 0);
