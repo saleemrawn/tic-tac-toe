@@ -293,10 +293,10 @@ const gameController = (function () {
   };
 
   const resetGame = () => {
-    resetBoardArr();
     resetTurnCount();
     playerOne.setHasWon(false);
     playerTwo.setHasWon(false);
+    gameBoard.resetBoardArr();
     displayController.enableAllButtons();
     displayController.resetButtonText();
   };
