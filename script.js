@@ -1,19 +1,19 @@
 const gameBoard = (function () {
   let board = ["", "", "", "", "", "", "", "", ""];
 
-  const getBoard = () => board;
-  const addMarkToBoard = (position, mark) => board.splice(position, 1, mark);
+  const getBoardArr = () => board;
+  const addMarkToBoardArr = (position, mark) => board.splice(position, 1, mark);
   const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
 
   return {
-    getBoard,
-    addMarkToBoard,
+    getBoardArr,
+    addMarkToBoardArr,
     resetBoardArr,
   };
 })();
 
 const displayController = (function () {
-  const board = gameBoard.getBoard();
+  const board = gameBoard.getBoardArr();
 
   const renderGameboard = () => {
     const container = document.querySelector(".gameboard-container");
@@ -315,7 +315,7 @@ function createPlayer(mark = "", turn = false) {
   const setName = (name) => (playerName = name);
   const getMark = () => playerMark;
   const addMark = (position) => {
-    gameBoard.addMarkToBoard(position, playerMark);
+    gameBoard.addMarkToBoardArr(position, playerMark);
     gameBoard.increaseTurnCount();
     gameBoard.checkGameProgress();
   };
