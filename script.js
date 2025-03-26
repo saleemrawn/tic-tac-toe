@@ -1,78 +1,14 @@
 const gameBoard = (function () {
   let board = ["", "", "", "", "", "", "", "", ""];
-  let turnCount = 0;
 
   const getBoard = () => board;
   const addMarkToBoard = (position, mark) => board.splice(position, 1, mark);
   const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
-  const resetTurnCount = () => (turnCount = 0);
-  const resetGame = () => {
-    resetBoardArr();
-    resetTurnCount();
-    playerOne.setHasWon(false);
-    playerTwo.setHasWon(false);
-    displayController.enableAllButtons();
-    displayController.resetButtonText();
-  };
-  const increaseTurnCount = () => turnCount++;
-  const checkPlayerOneWin = () => {
-    if (
-      (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
-      (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
-      (board[6] === "X" && board[7] === "X" && board[8] === "X") ||
-      (board[0] === "X" && board[3] === "X" && board[6] === "X") ||
-      (board[1] === "X" && board[4] === "X" && board[7] === "X") ||
-      (board[2] === "X" && board[5] === "X" && board[8] === "X") ||
-      (board[0] === "X" && board[4] === "X" && board[8] === "X") ||
-      (board[2] === "X" && board[4] === "X" && board[6] === "X")
-    ) {
-      playerOne.setHasWon(true);
-      playerOne.incrementScore();
-      displayController.disableAllButtons();
-      displayController.updateScoreElement(1);
-      displayController.handleAnnouncementEvent("Game Over!", playerOne.getName());
-    }
-  };
-  const checkPlayerTwoWin = () => {
-    if (
-      (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
-      (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
-      (board[6] === "O" && board[7] === "O" && board[8] === "O") ||
-      (board[0] === "O" && board[3] === "O" && board[6] === "O") ||
-      (board[1] === "O" && board[4] === "O" && board[7] === "O") ||
-      (board[2] === "O" && board[5] === "O" && board[8] === "O") ||
-      (board[0] === "O" && board[4] === "O" && board[8] === "O") ||
-      (board[2] === "O" && board[4] === "O" && board[6] === "O")
-    ) {
-      playerTwo.setHasWon(true);
-      playerTwo.incrementScore();
-      displayController.disableAllButtons();
-      displayController.updateScoreElement(2);
-      displayController.handleAnnouncementEvent("Game Over!", playerTwo.getName());
-    }
-  };
-
-  const checkDraw = () => {
-    if (turnCount === 9 && playerOne.getHasWon() === false && playerTwo.getHasWon() === false) {
-      displayController.disableAllButtons();
-      displayController.handleAnnouncementEvent("Draw!");
-    }
-  };
-
-  const checkGameProgress = () => {
-    checkPlayerOneWin();
-    checkPlayerTwoWin();
-    checkDraw();
-  };
 
   return {
     getBoard,
     addMarkToBoard,
     resetBoardArr,
-    resetTurnCount,
-    resetGame,
-    increaseTurnCount,
-    checkGameProgress,
   };
 })();
 
@@ -300,6 +236,72 @@ const displayController = (function () {
 const gameController = (function () {
   const playerOne = createPlayer("X", true);
   const playerTwo = createPlayer("O", false);
+  let turnCount = 0;
+
+  const resetTurnCount = () => (turnCount = 0);
+  const increaseTurnCount = () => turnCount++;
+
+  const checkPlayerOneWin = () => {
+    if (
+      (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
+      (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
+      (board[6] === "X" && board[7] === "X" && board[8] === "X") ||
+      (board[0] === "X" && board[3] === "X" && board[6] === "X") ||
+      (board[1] === "X" && board[4] === "X" && board[7] === "X") ||
+      (board[2] === "X" && board[5] === "X" && board[8] === "X") ||
+      (board[0] === "X" && board[4] === "X" && board[8] === "X") ||
+      (board[2] === "X" && board[4] === "X" && board[6] === "X")
+    ) {
+      playerOne.setHasWon(true);
+      playerOne.incrementScore();
+      displayController.disableAllButtons();
+      displayController.updateScoreElement(1);
+      displayController.handleAnnouncementEvent("Game Over!", playerOne.getName());
+    }
+  };
+
+  const checkPlayerTwoWin = () => {
+    if (
+      (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
+      (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
+      (board[6] === "O" && board[7] === "O" && board[8] === "O") ||
+      (board[0] === "O" && board[3] === "O" && board[6] === "O") ||
+      (board[1] === "O" && board[4] === "O" && board[7] === "O") ||
+      (board[2] === "O" && board[5] === "O" && board[8] === "O") ||
+      (board[0] === "O" && board[4] === "O" && board[8] === "O") ||
+      (board[2] === "O" && board[4] === "O" && board[6] === "O")
+    ) {
+      playerTwo.setHasWon(true);
+      playerTwo.incrementScore();
+      displayController.disableAllButtons();
+      displayController.updateScoreElement(2);
+      displayController.handleAnnouncementEvent("Game Over!", playerTwo.getName());
+    }
+  };
+
+  const checkDraw = () => {
+    if (turnCount === 9 && playerOne.getHasWon() === false && playerTwo.getHasWon() === false) {
+      displayController.disableAllButtons();
+      displayController.handleAnnouncementEvent("Draw!");
+    }
+  };
+
+  const checkGameProgress = () => {
+    checkPlayerOneWin();
+    checkPlayerTwoWin();
+    checkDraw();
+  };
+
+  const resetGame = () => {
+    resetBoardArr();
+    resetTurnCount();
+    playerOne.setHasWon(false);
+    playerTwo.setHasWon(false);
+    displayController.enableAllButtons();
+    displayController.resetButtonText();
+  };
+
+  return {};
 })();
 
 function createPlayer(mark = "", turn = false) {
