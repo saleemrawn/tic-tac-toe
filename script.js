@@ -118,7 +118,7 @@ const displayController = (function () {
     addPlayerButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
         const playerNumber = event.target.getAttribute("data-player-number");
-        showDialog();
+        showAddPlayerDialog();
         setFormPlayerAttr(playerNumber);
       });
     });
@@ -141,7 +141,7 @@ const displayController = (function () {
       if (playerNumber === "1") {
         savePlayerOneName(name);
         resetForm();
-        closeDialog();
+        closeAddPlayerDialog();
         displayController.showElements(playerOneName);
         displayController.hideElements(addPlayerOneButton);
         playerTwo.getName() !== "" ? displayController.enableAllButtons() : -1;
@@ -150,7 +150,7 @@ const displayController = (function () {
       if (playerNumber === "2") {
         savePlayerTwoName(name);
         resetForm();
-        closeDialog();
+        closeAddPlayerDialog();
         displayController.showElements(playerTwoName);
         displayController.hideElements(addPlayerTwoButton);
         playerOne.getName() !== "" ? displayController.enableAllButtons() : -1;
@@ -162,7 +162,7 @@ const displayController = (function () {
     const cancelButton = document.querySelector(".cancel-button");
     cancelButton.addEventListener("click", () => {
       resetForm();
-      closeDialog();
+      closeAddPlayerDialog();
     });
   };
 
@@ -230,12 +230,12 @@ const displayController = (function () {
     });
   };
 
-  const showDialog = () => {
+  const showAddPlayerDialog = () => {
     const addPlayerDialog = document.querySelector(".add-player-dialog");
     addPlayerDialog.show();
   };
 
-  const closeDialog = () => {
+  const closeAddPlayerDialog = () => {
     const addPlayerDialog = document.querySelector(".add-player-dialog");
     addPlayerDialog.close();
   };
