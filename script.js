@@ -85,7 +85,7 @@ const displayController = (function () {
     board.forEach((mark, index) => {
       container.insertAdjacentHTML(
         "beforeend",
-        `<button class="board-button" data-grid-number="${index}">${mark}</button>`
+        `<button class="board-button" data-grid-number="${index}" disabled>${mark}</button>`
       );
     });
   };
@@ -144,6 +144,7 @@ const displayController = (function () {
         closeDialog();
         displayController.showElements(playerOneName);
         displayController.hideElements(addPlayerOneButton);
+        playerTwo.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
 
       if (playerNumber === "2") {
@@ -152,6 +153,7 @@ const displayController = (function () {
         closeDialog();
         displayController.showElements(playerTwoName);
         displayController.hideElements(addPlayerTwoButton);
+        playerOne.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
     });
   };
@@ -328,12 +330,12 @@ function createPlayer(mark = "", turn = false) {
   };
 }
 
+const playerOne = createPlayer("X", true);
+const playerTwo = createPlayer("O", false);
+
 displayController.renderGameboard();
 displayController.handlePlayerMarkEvents();
 displayController.handleAddPlayerEvent();
 displayController.handleSaveDialogEvent();
 displayController.handleCancelDialogEvent();
 displayController.handlePlayAgainEvent();
-
-const playerOne = createPlayer("X", true);
-const playerTwo = createPlayer("O", false);
