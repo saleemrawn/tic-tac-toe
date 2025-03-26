@@ -17,7 +17,6 @@ const displayController = (function () {
 
   const renderGameboard = () => {
     const container = document.querySelector(".gameboard-container");
-
     board.forEach((mark, index) => {
       container.insertAdjacentHTML(
         "beforeend",
@@ -236,13 +235,14 @@ const displayController = (function () {
 const gameController = (function () {
   const playerOne = createPlayer("X", true);
   const playerTwo = createPlayer("O", false);
-  const board = gameBoard.getBoardArr();
   let turnCount = 0;
 
   const resetTurnCount = () => (turnCount = 0);
   const increaseTurnCount = () => turnCount++;
 
   const checkPlayerOneWin = () => {
+    const board = gameBoard.getBoardArr();
+
     if (
       (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
       (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
@@ -262,6 +262,8 @@ const gameController = (function () {
   };
 
   const checkPlayerTwoWin = () => {
+    const board = gameBoard.getBoardArr();
+
     if (
       (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
       (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
