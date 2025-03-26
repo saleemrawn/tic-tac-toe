@@ -319,8 +319,8 @@ function createPlayer(mark = "", turn = false) {
   const getMark = () => playerMark;
   const addMark = (position) => {
     gameBoard.addMarkToBoardArr(position, playerMark);
-    gameController.checkGameProgress();
     gameController.increaseTurnCount();
+    gameController.checkGameProgress();
   };
 
   const getScore = () => playerScore;
