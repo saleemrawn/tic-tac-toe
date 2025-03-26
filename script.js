@@ -12,6 +12,8 @@ const gameBoard = (function () {
     resetBoardArr();
     resetIsWinner();
     resetTurnCount();
+    playerOne.setHasWon(false);
+    playerTwo.setHasWon(false);
     displayController.enableAllButtons();
     displayController.resetButtonText();
   };
