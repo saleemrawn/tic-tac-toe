@@ -1,16 +1,13 @@
 const gameBoard = (function () {
   let board = ["", "", "", "", "", "", "", "", ""];
   let turnCount = 0;
-  let isWinner = false;
 
   const getBoard = () => board;
   const addMarkToBoard = (position, mark) => board.splice(position, 1, mark);
   const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
-  const resetIsWinner = () => (isWinner = false);
   const resetTurnCount = () => (turnCount = 0);
   const resetGame = () => {
     resetBoardArr();
-    resetIsWinner();
     resetTurnCount();
     playerOne.setHasWon(false);
     playerTwo.setHasWon(false);
@@ -72,7 +69,6 @@ const gameBoard = (function () {
     getBoard,
     addMarkToBoard,
     resetBoardArr,
-    resetIsWinner,
     resetTurnCount,
     resetGame,
     increaseTurnCount,
