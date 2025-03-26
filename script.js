@@ -31,20 +31,20 @@ const displayController = (function () {
 
     boardButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
-        if (playerOne.getPlayerTurn() === true) {
-          playerOne.addMark(event.target.getAttribute("data-grid-number"));
-          event.target.innerHTML = playerOne.getMark();
+        if (gameController.playerOne.getPlayerTurn() === true) {
+          gameController.playerOne.addMark(event.target.getAttribute("data-grid-number"));
+          event.target.innerHTML = gameController.playerOne.getMark();
           event.target.setAttribute("disabled", "");
-          playerOne.setPlayerTurn(false);
-          playerTwo.setPlayerTurn(true);
+          gameController.playerOne.setPlayerTurn(false);
+          gameController.playerTwo.setPlayerTurn(true);
           return;
         }
 
-        playerTwo.addMark(event.target.getAttribute("data-grid-number"));
-        event.target.innerHTML = playerTwo.getMark();
+        gameController.playerTwo.addMark(event.target.getAttribute("data-grid-number"));
+        event.target.innerHTML = gameController.playerTwo.getMark();
         event.target.setAttribute("disabled", "");
-        playerTwo.setPlayerTurn(false);
-        playerOne.setPlayerTurn(true);
+        gameController.playerTwo.setPlayerTurn(false);
+        gameController.playerOne.setPlayerTurn(true);
       });
     });
   };
@@ -80,7 +80,7 @@ const displayController = (function () {
         closeAddPlayerDialog();
         displayController.showElements(playerOneName);
         displayController.hideElements(addPlayerOneButton);
-        playerTwo.getName() !== "" ? displayController.enableAllButtons() : -1;
+        gameController.playerTwo.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
 
       if (playerNumber === "2") {
@@ -89,7 +89,7 @@ const displayController = (function () {
         closeAddPlayerDialog();
         displayController.showElements(playerTwoName);
         displayController.hideElements(addPlayerTwoButton);
-        playerOne.getName() !== "" ? displayController.enableAllButtons() : -1;
+        gameController.playerOne.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
     });
   };
@@ -126,14 +126,14 @@ const displayController = (function () {
 
     if (playerNumber === 1) {
       const playerOneName = document.querySelector(".player-one-name");
-      playerOne.setName(name);
-      playerOneName.innerHTML = playerOne.getName();
+      gameController.playerOne.setName(name);
+      playerOneName.innerHTML = gameController.playerOne.getName();
     }
 
     if (playerNumber === 2) {
       const playerTwoName = document.querySelector(".player-two-name");
-      playerTwo.setName(name);
-      playerTwoName.innerHTML = playerTwo.getName();
+      gameController.playerTwo.setName(name);
+      playerTwoName.innerHTML = gameController.playerTwo.getName();
     }
   };
 
@@ -144,12 +144,12 @@ const displayController = (function () {
 
     if (playerNumber === 1) {
       const label = document.querySelector(".player-one-score-count");
-      label.innerHTML = playerOne.getScore();
+      label.innerHTML = gameController.playerOne.getScore();
     }
 
     if (playerNumber === 2) {
       const label = document.querySelector(".player-two-score-count");
-      label.innerHTML = playerTwo.getScore();
+      label.innerHTML = gameController.playerTwo.getScore();
     }
   };
 
