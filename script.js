@@ -32,6 +32,7 @@ const displayController = (function () {
         if (gameController.playerOne.getPlayerTurn() === true) {
           event.target.innerHTML = gameController.playerOne.getMark();
           event.target.setAttribute("disabled", "");
+          event.target.classList.add("marked");
           gameController.playerOne.addMark(event.target.getAttribute("data-grid-number"));
           gameController.playerOne.setPlayerTurn(false);
           gameController.playerTwo.setPlayerTurn(true);
@@ -41,6 +42,7 @@ const displayController = (function () {
         if (gameController.playerTwo.getPlayerTurn() === true) {
           event.target.innerHTML = gameController.playerTwo.getMark();
           event.target.setAttribute("disabled", "");
+          event.target.classList.add("marked");
           gameController.playerTwo.addMark(event.target.getAttribute("data-grid-number"));
           gameController.playerTwo.setPlayerTurn(false);
           gameController.playerOne.setPlayerTurn(true);
@@ -200,6 +202,13 @@ const displayController = (function () {
     });
   };
 
+  const resetButtonStyle = () => {
+    const boardButtons = document.querySelectorAll(".board-button");
+    boardButtons.forEach((button) => {
+      button.classList.remove("marked");
+    });
+  };
+
   const resetForm = () => {
     const addPlayerForm = document.querySelector(".add-player-form");
     addPlayerForm.reset();
@@ -233,6 +242,7 @@ const displayController = (function () {
     enableAllButtons,
     disableAllButtons,
     resetButtonText,
+    resetButtonStyle,
   };
 })();
 
@@ -305,6 +315,7 @@ const gameController = (function () {
     playerTwo.setHasWon(false);
     gameBoard.resetBoardArr();
     displayController.enableAllButtons();
+    displayController.resetButtonStyle();
     displayController.resetButtonText();
   };
 
