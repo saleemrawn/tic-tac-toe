@@ -1,9 +1,8 @@
 const gameBoard = (function () {
   let board = ["", "", "", "", "", "", "", "", ""];
-
   const getBoardArr = () => board;
   const addMarkToBoardArr = (position, mark) => board.splice(position, 1, mark);
-  const resetBoardArr = () => (board = ["", "", "", "", "", "", "", "", ""]);
+  const resetBoardArr = () => board.fill("");
 
   return {
     getBoardArr,
