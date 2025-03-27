@@ -79,8 +79,8 @@ const displayController = (function () {
         savePlayerName(1, name);
         resetForm();
         closeAddPlayerDialog();
-        displayController.showElements(playerOneName);
-        displayController.hideElements(addPlayerOneButton);
+        showElements(playerOneName);
+        hideElements(addPlayerOneButton);
         gameController.playerTwo.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
 
@@ -88,8 +88,8 @@ const displayController = (function () {
         savePlayerName(2, name);
         resetForm();
         closeAddPlayerDialog();
-        displayController.showElements(playerTwoName);
-        displayController.hideElements(addPlayerTwoButton);
+        showElements(playerTwoName);
+        hideElements(addPlayerTwoButton);
         gameController.playerOne.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
     });
@@ -232,8 +232,6 @@ const displayController = (function () {
     updateScoreElement,
     enableAllButtons,
     disableAllButtons,
-    hideElements,
-    showElements,
     resetButtonText,
   };
 })();
