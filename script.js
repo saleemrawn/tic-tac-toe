@@ -120,7 +120,7 @@ const displayController = (function () {
     player === "" ? (winnerName.innerHTML = "") : (winnerName.innerHTML = `${player} wins!`);
   };
 
-  const savePlayerName = (playerNumber = 0, name = "") => {
+  const savePlayerName = (playerNumber, name = "") => {
     if (playerNumber !== 1 && playerNumber !== 2) {
       throw new Error(`Invalid argument: expected 1 or 2, but received ${player}.`);
     }
