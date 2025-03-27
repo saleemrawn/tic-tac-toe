@@ -30,19 +30,22 @@ const displayController = (function () {
     boardButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
         if (gameController.playerOne.getPlayerTurn() === true) {
-          gameController.playerOne.addMark(event.target.getAttribute("data-grid-number"));
           event.target.innerHTML = gameController.playerOne.getMark();
           event.target.setAttribute("disabled", "");
+          gameController.playerOne.addMark(event.target.getAttribute("data-grid-number"));
           gameController.playerOne.setPlayerTurn(false);
           gameController.playerTwo.setPlayerTurn(true);
           return;
         }
 
-        gameController.playerTwo.addMark(event.target.getAttribute("data-grid-number"));
-        event.target.innerHTML = gameController.playerTwo.getMark();
-        event.target.setAttribute("disabled", "");
-        gameController.playerTwo.setPlayerTurn(false);
-        gameController.playerOne.setPlayerTurn(true);
+        if (gameController.playerTwo.getPlayerTurn() === true) {
+          event.target.innerHTML = gameController.playerTwo.getMark();
+          event.target.setAttribute("disabled", "");
+          gameController.playerTwo.addMark(event.target.getAttribute("data-grid-number"));
+          gameController.playerTwo.setPlayerTurn(false);
+          gameController.playerOne.setPlayerTurn(true);
+          return;
+        }
       });
     });
   };
