@@ -200,10 +200,11 @@ form input {
 
 .p1-info-container,
 .p2-info-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-items: center;
+  display: grid;
   gap: 1.5rem;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr;
   width: 15.625rem;
   height: 18.75rem;
   padding: 2.5rem 1.5rem;
