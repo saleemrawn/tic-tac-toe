@@ -327,7 +327,7 @@ const gameController = (function () {
       displayController.disableAllButtons();
       displayController.markAllBoardButtons();
       displayController.updateScoreElement(2);
-      displayController.handleAnnouncementEvent("Game Over!", playerTwo.getName());
+      displayController.handleAnnouncementEvent("Game Over", playerTwo.getName());
     }
   };
 
