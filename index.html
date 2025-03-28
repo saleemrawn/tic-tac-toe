@@ -3,10 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Tic Tac Toe</title>
   </head>
   <body>
+    <header>
+      <h1 class="logo">Tic Tac Toe</h1>
+      <button class="new-game-button primary-button">&#x2b; New Game</button>
+    </header>
+    <main>
+      <div class="p1-container">
+        <p class="p1-turn-label transparent">Your turn</p>
+        <div class="p1-info-container">
+          <p class="player-mark">X</p>
+          <p class="p1-name hide"></p>
+          <button class="add-player-button default-button" data-player-number="1">Add Player</button>
+          <div class="score-container">
+            <p class="score-label">Score</p>
+            <p class="p1-score-count">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gameboard-container"></div>
+
+      <div class="p2-container">
+        <p class="p2-turn-label transparent">Your turn</p>
+        <div class="p2-info-container">
+          <p class="player-mark">O</p>
+          <p class="p2-name hide"></p>
+          <button class="add-player-button default-button" data-player-number="2">Add Player</button>
+          <div class="score-container">
+            <p class="score-label">Score</p>
+            <p class="p2-score-count">0</p>
+          </div>
+        </div>
+      </div>
+
+      <dialog class="add-player-dialog">
+        <form class="add-player-form">
+          <div class="form-name-container">
+            <label for="name">Enter player name</label>
+            <input type="text" name="name" id="name" required />
+          </div>
+          <div class="form-buttons-container">
+            <button class="cancel-button" type="button" formmethod="dialog">Cancel</button>
+            <button class="save-button" type="submit">Save</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog class="announcement-dialog">
+        <div class="announcement-inner-container">
+          <p class="status-title"></p>
+          <p class="winner-name"></p>
+          <button type="button" class="play-again-button primary-button">Play Again?</button>
+        </div>
+      </dialog>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
