@@ -126,6 +126,13 @@ const displayController = (function () {
     player === "" ? (winnerName.innerHTML = "") : (winnerName.innerHTML = `${player} wins!`);
   };
 
+  const handleNewGameEvent = () => {
+    const button = document.querySelector(".new-game-button");
+    button.addEventListener("click", () => {
+      window.location.reload();
+    });
+  };
+
   const savePlayerName = (playerNumber, name = "") => {
     if (playerNumber !== 1 && playerNumber !== 2) {
       throw new Error(`Invalid argument: expected 1 or 2, but received ${player}.`);
@@ -265,6 +272,7 @@ const displayController = (function () {
     handleSaveDialogEvent();
     handleCancelDialogEvent();
     handlePlayAgainEvent();
+    handleNewGameEvent();
   };
 
   return {
