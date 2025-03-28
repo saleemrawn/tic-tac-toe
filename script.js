@@ -36,6 +36,7 @@ const displayController = (function () {
           gameController.playerOne.addMark(event.target.getAttribute("data-grid-number"));
           gameController.playerOne.setPlayerTurn(false);
           gameController.playerTwo.setPlayerTurn(true);
+          displayCurrentTurn(2);
           return;
         }
 
@@ -46,6 +47,7 @@ const displayController = (function () {
           gameController.playerTwo.addMark(event.target.getAttribute("data-grid-number"));
           gameController.playerTwo.setPlayerTurn(false);
           gameController.playerOne.setPlayerTurn(true);
+          displayCurrentTurn(1);
           return;
         }
       });
@@ -94,6 +96,8 @@ const displayController = (function () {
         hideElements(addPlayerTwoButton);
         gameController.playerOne.getName() !== "" ? displayController.enableAllButtons() : -1;
       }
+
+      if (gameController.playerOne.getName() !== "" && gameController.playerTwo.getName() !== "") displayCurrentTurn(1);
     });
   };
 
@@ -159,6 +163,27 @@ const displayController = (function () {
   const setFormPlayerAttr = (playerNumber) => {
     const addPlayerForm = document.querySelector(".add-player-form");
     addPlayerForm.setAttribute("data-player-number", playerNumber);
+  };
+
+  const displayCurrentTurn = (playerNumber) => {
+    const playerOneContainer = document.querySelector(".p1-info-container");
+    const playerOneTurnLabel = document.querySelector(".p1-turn-label");
+    const playerTwoContainer = document.querySelector(".p2-info-container");
+    const playerTwoTurnLabel = document.querySelector(".p2-turn-label");
+
+    if (playerNumber === 1) {
+      playerOneContainer.classList.add("current-turn");
+      playerOneTurnLabel.classList.remove("transparent");
+      playerTwoTurnLabel.classList.add("transparent");
+      playerTwoContainer.classList.remove("current-turn");
+    }
+
+    if (playerNumber === 2) {
+      playerTwoContainer.classList.add("current-turn");
+      playerTwoTurnLabel.classList.remove("transparent");
+      playerOneTurnLabel.classList.add("transparent");
+      playerOneContainer.classList.remove("current-turn");
+    }
   };
 
   const enableAllButtons = () => {
