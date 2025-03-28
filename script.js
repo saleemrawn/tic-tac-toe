@@ -200,6 +200,13 @@ const displayController = (function () {
     });
   };
 
+  const markAllBoardButtons = () => {
+    const boardButtons = document.querySelectorAll(".board-button");
+    boardButtons.forEach((button) => {
+      button.classList.add("marked");
+    });
+  };
+
   const showAddPlayerDialog = () => {
     const addPlayerDialog = document.querySelector(".add-player-dialog");
     addPlayerDialog.show();
@@ -266,6 +273,7 @@ const displayController = (function () {
     updateScoreElement,
     enableAllButtons,
     disableAllButtons,
+    markAllBoardButtons,
     resetButtonText,
     resetButtonStyle,
   };
@@ -295,6 +303,7 @@ const gameController = (function () {
       playerOne.setHasWon(true);
       playerOne.incrementScore();
       displayController.disableAllButtons();
+      displayController.markAllBoardButtons();
       displayController.updateScoreElement(1);
       displayController.handleAnnouncementEvent("Game Over!", playerOne.getName());
     }
@@ -316,6 +325,7 @@ const gameController = (function () {
       playerTwo.setHasWon(true);
       playerTwo.incrementScore();
       displayController.disableAllButtons();
+      displayController.markAllBoardButtons();
       displayController.updateScoreElement(2);
       displayController.handleAnnouncementEvent("Game Over!", playerTwo.getName());
     }
@@ -324,6 +334,7 @@ const gameController = (function () {
   const checkDraw = () => {
     if (turnCount === 9 && playerOne.getHasWon() === false && playerTwo.getHasWon() === false) {
       displayController.disableAllButtons();
+      displayController.markAllBoardButtons();
       displayController.handleAnnouncementEvent("Draw!");
     }
   };
