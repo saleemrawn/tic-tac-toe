@@ -69,8 +69,8 @@ const displayController = (function () {
     const addPlayerForm = document.querySelector(".add-player-form");
     const addPlayerOneButton = document.querySelector(".add-player-button[data-player-number='1']");
     const addPlayerTwoButton = document.querySelector(".add-player-button[data-player-number='2']");
-    const playerOneName = document.querySelector(".player-one-name");
-    const playerTwoName = document.querySelector(".player-two-name");
+    const playerOneName = document.querySelector(".p1-name");
+    const playerTwoName = document.querySelector(".p2-name");
 
     addPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -132,13 +132,13 @@ const displayController = (function () {
     }
 
     if (playerNumber === 1) {
-      const playerOneName = document.querySelector(".player-one-name");
+      const playerOneName = document.querySelector(".p1-name");
       gameController.playerOne.setName(name);
       playerOneName.innerHTML = gameController.playerOne.getName();
     }
 
     if (playerNumber === 2) {
-      const playerTwoName = document.querySelector(".player-two-name");
+      const playerTwoName = document.querySelector(".p2-name");
       gameController.playerTwo.setName(name);
       playerTwoName.innerHTML = gameController.playerTwo.getName();
     }
@@ -150,12 +150,12 @@ const displayController = (function () {
     }
 
     if (playerNumber === 1) {
-      const label = document.querySelector(".player-one-score-count");
+      const label = document.querySelector(".p1-score-count");
       label.innerHTML = gameController.playerOne.getScore();
     }
 
     if (playerNumber === 2) {
-      const label = document.querySelector(".player-two-score-count");
+      const label = document.querySelector(".p2-score-count");
       label.innerHTML = gameController.playerTwo.getScore();
     }
   };
